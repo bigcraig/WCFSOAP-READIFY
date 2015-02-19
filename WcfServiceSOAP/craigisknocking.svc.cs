@@ -12,25 +12,45 @@ namespace WcfServiceSOAP
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class CraigService : ICraig
     {
-        public int fibonacci(int value)
+        public long fibonacci(long value)
         {
-            int a = 0;
-            int b = 1;
-            // In N steps compute Fibonacci sequence iteratively.
-            for (int i = 0; i < value; i++)
+
+            
+            long a = 0;
+            long b = 1;
+            try
             {
-                int temp = a;
-                a = b;
-                b = temp + b;
+                if (value > 94) 
+                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value","fib 92 is bad"), new FaultReason("fabbanici blows"));
+                }
+                    // In N steps compute Fibonacci sequence iteratively.
+                for (int i = 0; i < value; i++)
+                {
+                    long temp = a;
+                    a = b;
+                    b = checked(temp + b);
+                }
+                return b;
             }
-            return b;
+            catch(ArgumentOutOfRangeException e)
+            {
+
+                ArgumentOutOfRangeFault fault = new ArgumentOutOfRangeFault();
+                fault.Result = false;
+                fault.Message = " FIb(92)> will result in a 64bit integer overflow, sorry your story is too large";
+                fault.Description = " FIb(92)> will result in a 64bit integer overflow, sorry your story is too large";
+                
+                // now throw fault exception to be transmitted to client
+               // throw new FaultException<ArgumentOutOfRangeFault>(fault);
+                throw new FaultException<ArgumentOutOfRangeException>(e);
+            }
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
             if (composite == null)
             {
-                throw new ArgumentNullException("composite");
+                throw new FaultException("composite");
             }
             if (composite.BoolValue)
             {

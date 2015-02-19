@@ -14,8 +14,10 @@ namespace WcfServiceSOAP
     {
 
         [OperationContract]
-        int fibonacci(int i);
-
+        [FaultContract(typeof(ArgumentOutOfRangeException))]
+        long fibonacci(long i);
+        
+        // need to define an exception to be returned to the soap client
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
@@ -25,6 +27,16 @@ namespace WcfServiceSOAP
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
+    public class ArgumentOutOfRangeFault
+    {
+         [DataMember]
+    public bool Result { get; set; }
+    [DataMember]
+    public string Message { get; set; }
+    [DataMember]
+    public string Description { get; set; }
+    }
+    
     public class CompositeType
     {
         bool boolValue = true;
