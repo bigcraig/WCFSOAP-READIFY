@@ -24,7 +24,10 @@ namespace WcfServiceSOAP
 
         [OperationContract]
         Guid WhatIsYourToken();
-    
+
+        [OperationContract]
+        TriangleType WhatShapeIsThis(int a, int b, int c);
+            
         // TODO: Add your service operations here
     }
 
@@ -41,6 +44,22 @@ namespace WcfServiceSOAP
     public string Description { get; set; }
     }
     
+    [DataContract]
+        public enum TriangleType : int
+    {
+        
+        [EnumMember]
+        Error = 0,
+        [EnumMember]      
+        Equilateral = 1,
+        
+        [EnumMember]
+        Isosceles = 2,
+        
+        [EnumMember]
+        Scalene = 3,
+    }
+
     public class CompositeType
     {
         bool boolValue = true;

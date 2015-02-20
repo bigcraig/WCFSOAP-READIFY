@@ -57,6 +57,30 @@ namespace WcfServiceSOAP
       return myGuid;
     }
 
+        public TriangleType WhatShapeIsThis(int a, int b, int c)
+        {
+
+            TriangleType result =TriangleType.Error;
+            int matchingsides = 0;
+            // first test that the triangle is valid by passing the following tests
+            if ( (a+b) > c)  matchingsides++;
+            if ( (a+c) > b)  matchingsides++;
+            if ( (c+b) > a)  matchingsides++;
+            if (matchingsides < 3)
+            {
+                return result;
+            }//  now test for TriangleType type
+            matchingsides = 0;
+            if (a == b) matchingsides++;
+            if (b == c) matchingsides++;
+            if (a == c) matchingsides++;
+            if (matchingsides == 0) result = TriangleType.Scalene;
+            if (matchingsides == 1) result = TriangleType.Isosceles ;
+            if (matchingsides > 1) result = TriangleType.Equilateral;
+
+            return result;
+        }
+
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
             if (composite == null)
