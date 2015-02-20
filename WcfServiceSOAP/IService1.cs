@@ -9,7 +9,8 @@ using System.Text;
 namespace WcfServiceSOAP
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
-    [ServiceContract]
+    [ServiceContract(Namespace="http://craigwoollett.com/servicesV1")]
+  //  [ServiceContract]
     public interface ICraig
     {
 
@@ -21,6 +22,9 @@ namespace WcfServiceSOAP
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
+        [OperationContract]
+        Guid WhatIsYourToken();
+    
         // TODO: Add your service operations here
     }
 

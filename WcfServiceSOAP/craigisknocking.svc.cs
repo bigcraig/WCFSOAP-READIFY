@@ -10,6 +10,8 @@ namespace WcfServiceSOAP
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    [ServiceBehavior(Namespace="http://craigwoollett.com/servicesV1")]
+   // [ServiceBehavior]
     public class CraigService : ICraig
     {
         public long fibonacci(long value)
@@ -21,7 +23,7 @@ namespace WcfServiceSOAP
             try
             {
                 if (value > 94) 
-                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value","fib 92 is bad"), new FaultReason("fabbanici blows"));
+                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value"," greater than FIB(94) will cause 64bit integer overflow"), new FaultReason("FIB(94) or greater will cause 64bit intge overflow"));
                 }
                     // In N steps compute Fibonacci sequence iteratively.
                 for (int i = 0; i < value; i++)
@@ -45,6 +47,15 @@ namespace WcfServiceSOAP
                 throw new FaultException<ArgumentOutOfRangeException>(e);
             }
         }
+
+        public Guid  WhatIsYourToken()
+    {
+      //  Guid  myGuid = / Create a GUID with all zeros and compare it to Empty.
+      Byte[] bytes = new Byte[16];
+      Guid myguid = new Guid(bytes);
+      Guid myGuid = new Guid("c1170302-8e4e-4aca-bb3b-07f8936a0458");
+      return myGuid;
+    }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
