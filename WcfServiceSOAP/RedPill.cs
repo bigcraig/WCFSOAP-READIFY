@@ -36,7 +36,7 @@ namespace knockknock.readify.net
 
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.ServiceContractAttribute(Namespace="http://KnockKnock.readify.net", ConfigurationName="IRedPill")]
+[System.ServiceModel.ServiceContractAttribute(Namespace="http://KnockncwKnock.readify.net", ConfigurationName="IRedPill")]
 public interface IRedPill
 {
     

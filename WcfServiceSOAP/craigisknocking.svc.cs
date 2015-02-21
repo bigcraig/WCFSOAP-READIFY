@@ -12,7 +12,7 @@ namespace WcfServiceSOAP
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     [ServiceBehavior(Namespace="http://craigwoollett.com/servicesV1")]
    // [ServiceBehavior]
-    public class CraigService : ICraig
+    public class CraigService : IRedPill
     {
         public long fibonacci(long value)
         {
@@ -23,7 +23,7 @@ namespace WcfServiceSOAP
             try
             {
                 if (value > 94) 
-                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value"," greater than FIB(94) will cause 64bit integer overflow"), new FaultReason("FIB(94) or greater will cause 64bit intge overflow"));
+                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value"," greater than FIB(94) will cause 64bit integer overflow"), new FaultReason("FIB(94) or greater will cause 64bit integer overflow"));
                 }
                     // In N steps compute Fibonacci sequence iteratively.
                 for (int i = 0; i < value; i++)

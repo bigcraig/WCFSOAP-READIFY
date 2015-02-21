@@ -9,11 +9,14 @@ using System.Text;
 namespace WcfServiceSOAP
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
-    [ServiceContract(Namespace="http://craigwoollett.com/servicesV1")]
-  //  [ServiceContract]
-    public interface ICraig
-    {
+   // [ServiceContract(Namespace="http://craigwoollett.com/servicesV1")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://KnockKnock.readify.net", ConfigurationName="IRedPill")]
 
+  //  [ServiceContract]
+    public interface IRedPill
+    {
+        [System.ServiceModel.OperationContractAttribute(Action = "http://KnockKnock.readify.net/IRedPill/WhatIsYourToken", ReplyAction = "http://KnockKnock.readify.net/IRedPill/WhatIsYourTokenResponse")]
+        System.Guid WhatIsYourToken();
         [OperationContract]
         [FaultContract(typeof(ArgumentOutOfRangeException))]
         long fibonacci(long i);
@@ -22,8 +25,7 @@ namespace WcfServiceSOAP
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
-        [OperationContract]
-        Guid WhatIsYourToken();
+       
 
         [OperationContract]
         TriangleType WhatShapeIsThis(int a, int b, int c);
