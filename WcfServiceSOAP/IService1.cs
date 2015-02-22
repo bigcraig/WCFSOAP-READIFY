@@ -15,8 +15,11 @@ namespace WcfServiceSOAP
   //  [ServiceContract]
     public interface IRedPill
     {
-        [System.ServiceModel.OperationContractAttribute(Action = "http://KnockKnock.readify.net/IRedPill/WhatIsYourToken", ReplyAction = "http://KnockKnock.readify.net/IRedPill/WhatIsYourTokenResponse")]
+       // [System.ServiceModel.OperationContractAttribute(Action = "http://KnockKnock.readify.net/IRedPill/WhatIsYourToken", ReplyAction = "http://KnockKnock.readify.net/IRedPill/WhatIsYourTokenResponse")]
+       // this operations_contract has explicit defintions as generated with the svcutil , normally defined in the service contract attribute
+        [OperationContract]
         System.Guid WhatIsYourToken();
+       
         [OperationContract]
         [FaultContract(typeof(ArgumentOutOfRangeException))]
         long FibonacciNumber(long n);
@@ -29,6 +32,8 @@ namespace WcfServiceSOAP
 
         [OperationContract]
         TriangleType WhatShapeIsThis(int a, int b, int c);
+
+
             
         // TODO: Add your service operations here
     }
