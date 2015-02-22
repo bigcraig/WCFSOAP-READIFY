@@ -14,19 +14,22 @@ namespace WcfServiceSOAP
    // [ServiceBehavior]
     public class CraigService : IRedPill
     {
-        public long fibonacci(long value)
+        public long FibonacciNumber(long value)
         {
 
             
-            long a = 0;
-            long b = 1;
+            long a = 1;
+            long b = 0;
             try
             {
-                if (value > 94) 
-                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value"," greater than FIB(94) will cause 64bit integer overflow"), new FaultReason("FIB(94) or greater will cause 64bit integer overflow"));
+                if (value > 92) 
+                {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value"," greater than FIB(92) will cause 64bit integer overflow"), new FaultReason("FIB(92) or greater will cause 64bit integer overflow"));
                 }
-                    // In N steps compute Fibonacci sequence iteratively.
-                for (int i = 0; i < value; i++)
+
+                // by definition fib(0) = 0
+                if (value == 0) return (b);
+                // In N steps compute Fibonacci sequence iteratively.
+                for (int i = 1; i <= value; i++)
                 {
                     long temp = a;
                     a = b;
@@ -80,6 +83,26 @@ namespace WcfServiceSOAP
 
             return result;
         }
+        public string ReverseWords(string str)
+        {
+
+
+
+            // string str = "I am going to reverse myself.";
+            string strrev = "";
+            foreach (var word in str.Split(' '))
+            {
+                string temp = "";
+                foreach (var ch in word.ToCharArray())
+                {
+                    temp = ch + temp;
+                }
+                strrev = strrev + temp + " ";
+            }
+
+            return(strrev);  //I ma gniog ot esrever .flesym
+        }
+
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {

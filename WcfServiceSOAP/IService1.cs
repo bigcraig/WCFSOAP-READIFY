@@ -19,13 +19,13 @@ namespace WcfServiceSOAP
         System.Guid WhatIsYourToken();
         [OperationContract]
         [FaultContract(typeof(ArgumentOutOfRangeException))]
-        long fibonacci(long i);
+        long FibonacciNumber(long n);
         
         // need to define an exception to be returned to the soap client
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        
 
-       
+        [OperationContract]
+        string ReverseWords(string s);   
 
         [OperationContract]
         TriangleType WhatShapeIsThis(int a, int b, int c);
