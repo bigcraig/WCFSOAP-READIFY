@@ -134,17 +134,6 @@ namespace WcfServiceSOAP
             }
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new FaultException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
+        
     }
 }
