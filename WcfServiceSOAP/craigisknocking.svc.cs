@@ -86,23 +86,53 @@ namespace WcfServiceSOAP
         public string ReverseWords(string str)
         {
 
-
-
-            // string str = "I am going to reverse myself.";
-            string strrev = "";
-            foreach (var word in str.Split(' '))
+            try
             {
-                string temp = "";
-                foreach (var ch in word.ToCharArray())
+
+                // string str = "I am going to reverse myself.";
+                string strrev = "";
+                if (str == null)
+                    {
+                        throw new FaultException<ArgumentNullException>( new ArgumentNullException("str"," String Cannot be Null "), new FaultReason("String cannot be Null"));
+
+                     }   
+                foreach (var word in str.Split(' '))
                 {
-                    temp = ch + temp;
+                    string temp = "";
+                    foreach (var ch in word.ToCharArray())
+                    {
+                        temp = ch + temp;
+                    }
+                    strrev = strrev + temp + " ";
                 }
-                strrev = strrev + temp + " ";
+
+                return (strrev);  //I ma gniog ot esrever .flesym
             }
+            catch (ArgumentNullException e)
+            {
 
-            return(strrev);  //I ma gniog ot esrever .flesym
+                ArgumentNullFault fault = new ArgumentNullFault();
+                fault.Result = false;
+                fault.Message = "The String cannot be Null";
+                fault.Description = "The String cannot be Null";
+                
+                // now throw fault exception to be transmitted to client
+               // throw new FaultException<ArgumentOutOfRangeFault>(fault);
+                throw new FaultException<ArgumentNullException>(e);
+            }
+             catch (NullReferenceException e)
+            {
+
+                NullReferenceFault fault = new NullReferenceFault();
+                fault.Result = false;
+                fault.Message = "The String cannot be Null";
+                fault.Description = "The String cannot be Null";
+                
+                // now throw fault exception to be transmitted to client
+               // throw new FaultException<ArgumentOutOfRangeFault>(fault);
+                throw new FaultException<NullReferenceException>(e);
+            }
         }
-
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {

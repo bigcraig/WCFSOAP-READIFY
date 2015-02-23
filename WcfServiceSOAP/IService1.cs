@@ -28,6 +28,8 @@ namespace WcfServiceSOAP
         
 
         [OperationContract]
+        [FaultContract(typeof(NullReferenceException))]
+        [FaultContract(typeof(ArgumentNullException))]
         string ReverseWords(string s);   
 
         [OperationContract]
@@ -41,6 +43,27 @@ namespace WcfServiceSOAP
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
+    public class NullReferenceFault
+    {
+         [DataMember]
+    public bool Result { get; set; }
+    [DataMember]
+    public string Message { get; set; }
+    [DataMember]
+    public string Description { get; set; }
+    }
+
+    [DataContract]
+    public class ArgumentNullFault
+    {
+         [DataMember]
+    public bool Result { get; set; }
+    [DataMember]
+    public string Message { get; set; }
+    [DataMember]
+    public string Description { get; set; }
+    }
+      [DataContract]
     public class ArgumentOutOfRangeFault
     {
          [DataMember]
@@ -50,7 +73,9 @@ namespace WcfServiceSOAP
     [DataMember]
     public string Description { get; set; }
     }
-    
+
+
+
     [DataContract]
         public enum TriangleType : int
     {
