@@ -17,11 +17,17 @@ namespace WcfServiceSOAP
         public long FibonacciNumber(long value)
         {
 
-            
+            Boolean negativeFab = false;
             long a = 1;
             long b = 0;
             try
             {
+                if (value < 0)
+                {
+                    negativeFab = true;
+                    value = value * -1;
+                }
+
                 if (value > 92) 
                 {throw new FaultException<ArgumentOutOfRangeException>( new ArgumentOutOfRangeException("value"," greater than FIB(92) will cause 64bit integer overflow"), new FaultReason("FIB(92) or greater will cause 64bit integer overflow"));
                 }
@@ -35,6 +41,7 @@ namespace WcfServiceSOAP
                     a = b;
                     b = checked(temp + b);
                 }
+                if (negativeFab) b = b * -1;
                 return b;
             }
             catch(ArgumentOutOfRangeException e)
@@ -65,10 +72,14 @@ namespace WcfServiceSOAP
 
             TriangleType result =TriangleType.Error;
             int matchingsides = 0;
+            long longa, longb, longc;
+            longa = a;
+            longb = b;
+            longc = c;
             // first test that the triangle is valid by passing the following tests
-            if ( (a+b) > c)  matchingsides++;
-            if ( (a+c) > b)  matchingsides++;
-            if ( (c+b) > a)  matchingsides++;
+            if ( (longa+longb) > c)  matchingsides++;
+            if ( (longa+longc) > b)  matchingsides++;
+            if ( (longc+longb) > a)  matchingsides++;
             if (matchingsides < 3)
             {
                 return result;
@@ -93,7 +104,7 @@ namespace WcfServiceSOAP
                 string strrev = "";
                 if (str == null)
                     {
-                        throw new FaultException<ArgumentNullException>( new ArgumentNullException("str"," String Cannot be Null "), new FaultReason("String cannot be Null"));
+                        throw new FaultException<ArgumentNullException>( new ArgumentNullException("str","Value cannot be null"), new FaultReason("Value cannot be null"));
 
                      }   
                 foreach (var word in str.Split(' '))
@@ -105,8 +116,8 @@ namespace WcfServiceSOAP
                     }
                     strrev = strrev + temp + " ";
                 }
-
-                return (strrev);  //I ma gniog ot esrever .flesym
+                String withoutLast = strrev.Substring(0,strrev.Length -1);
+                return (withoutLast);  //I ma gniog ot esrever .flesym
             }
             catch (ArgumentNullException e)
             {
